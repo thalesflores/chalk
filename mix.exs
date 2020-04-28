@@ -5,7 +5,7 @@ defmodule Chalk.MixProject do
     [
       app: :chalk,
       version: "0.1.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.6",
       description: description(),
       package: package(),
       start_permanent: Mix.env() == :prod,
