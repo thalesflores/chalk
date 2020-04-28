@@ -5,11 +5,11 @@ defmodule Chalk.GraphQLRespose do
   @doc """
   It builds a struct with the GraphQL response. It returs a map with either `:ok` or `:error`
 
-  ## Arguments:
+  ##Arguments:
 
-    * raw_response, a map with grapql response that comes from HTTP request
+    *raw_response, a map with grapql response that comes from HTTP request
 
-  ## Examples:
+  ##Examples:
 
     iex> Response.build(%{data: %{"name" => "test_name"}})
     %Response%{data: %{"name" => "test_name"}}
