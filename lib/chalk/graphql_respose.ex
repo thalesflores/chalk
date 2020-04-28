@@ -1,4 +1,7 @@
 defmodule Chalk.GraphQLRespose do
+  @moduledoc """
+  Response struct to graphql responses
+  """
   defstruct [:data, :errors]
   @type t :: %__MODULE__{data: map(), errors: map()}
 
