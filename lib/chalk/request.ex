@@ -7,24 +7,24 @@ defmodule Chalk.Request do
   alias Chalk.GraphQLRespose
 
   @doc """
-    It executes the graphql request and returns a %GraphQLRespose{} struct with the response
+  It executes the graphql request and returns a %GraphQLRespose{} struct with the response
 
-    ## Arguments
+  ## Arguments
 
-      * request_params, a keyword that could contains
-        - url
-        - headers
-        - options
-      * query, string formatted as GraphQL query
-      * variables, map with variables that will be used in request
+    * request_params, a keyword that could contains
+      - url
+      - headers
+      - options
+    * query, string formatted as GraphQL query
+    * variables, map with variables that will be used in request
 
-    ## Examples
+  ## Examples
 
-      iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
-      %GraphQLRespose{}
+    iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
+    %GraphQLRespose{}
 
-      iex> Request.graphql_query([url: "http://test.com/", headers: [{"authorization", "234"}]], "query{users{name}"}, %{})
-      %GraphQLRespose{}
+    iex> Request.graphql_query([url: "http://test.com/", headers: [{"authorization", "234"}]], "query{users{name}"}, %{})
+    %GraphQLRespose{}
   """
   @spec graphql_query(request_params :: Keyword.t(), String.t(), map()) ::
           GraphQLResponse.t() | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
