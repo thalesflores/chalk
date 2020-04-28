@@ -9,16 +9,16 @@ defmodule Chalk.Request do
   @doc """
     It executes the graphql request and returns a %GraphQLRespose{} struct with the response
 
-    ## Arguments
+    ##Arguments
 
-      * request_params, a keyword that could contains
+      *request_params, a keyword that could contains
         - url
         - headers
         - options
-      * query, string formatted as GraphQL query
-      * variables, map with variables that will be used in request
+      *query, string formatted as GraphQL query
+      *variables, map with variables that will be used in request
 
-    ## Examples
+    ##Examples
 
       iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
       %GraphQLRespose{}

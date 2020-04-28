@@ -8,15 +8,15 @@ defmodule Chalk do
   @doc """
     Make a GrahpQL query to a client and returns %GraphQLResponse{} struct
 
-    ## Arguments
-      * `request_params`, a keyword that could contains
-        - `url`, the client url
-        - `options`, keyworkd with options to the request
-        - `headers`, keyworkd with headers to the request, i.e: `[{"authorization", "Bearer 234"}]`
-      * `query_params`, keyword with params to build the query
-      * `variables`, map with variables that will be uses in the query
+    ##Arguments
+      *request_params, a keyword that could contains
+        - url, the client url
+        - options, keyworkd with options to the request
+        - headers, keyworkd with headers to the request, i.e: [{"authorization", "Bearer 234"}]
+      *query_params, keyword with params to build the query
+      *variables, map with variables that will be uses in the query
 
-    ## Examples
+    ##Examples
 
       iex> request_params = [url: "https://test.com/]
       ...> query_params = [users: [:name, :age, friends: [:id, :name]]]
@@ -42,10 +42,10 @@ defmodule Chalk do
   @doc """
     It builds a query in format expected in Graphql
 
-    ## Arguments
-      * `query_params`, keyword with params to build the query
+    ##Arguments
+      *query_params, keyword with params to build the query
 
-    ## Examples
+    ##Examples
 
       iex> query_params = [users: [:name, :age, friends: [:id, :name]]]
       ...> Chalk.build_query(query_params)
