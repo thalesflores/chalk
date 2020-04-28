@@ -1,12 +1,36 @@
 defmodule Chalk do
   @moduledoc """
-  Documentation for `Chalk`.
+    `Chalk` is a client to make your life easy when you need to request GraphQL API's
   """
 
   alias __MODULE__.{GraphQLResponse, Request}
 
+  @doc """
+    Make a GrahpQL query to a client and returns %GraphQLResponse{} struct
+
+    ## Arguments
+      * `request_params`, a keyword that could contains
+        - `url`, the client url
+        - `options`, keyworkd with options to the request
+        - `headers`, keyworkd with headers to the request, i.e: `[{"authorization", "Bearer 234"}]`
+      * `query_params`, keyword with params to build the query
+      * `variables`, map with variables that will be uses in the query
+
+    ## Examples
+
+      iex> request_params = [url: "https://test.com/]
+      ...> query_params = [users: [:name, :age, friends: [:id, :name]]]
+      ...> Chalk.query(request_params, query_params)
+      %GraphQLResponse{}
+
+      iex> request_params = [url: "https://test.com/, headers: [{"Authorization", "Bearer 23333"}]]
+      ...> query_params = ["User(id: $id)": [:name, :age, friends: [:id, :name]]]
+      ...> variables = %{id: 123}
+      ...> Chalk.query(request_params, query_params, variables)
+      %GraphQLResponse{}
+  """
   @spec query(request_params :: keyword(), query_params :: keyword(), variables :: map()) ::
-          GraphQLResponse.t() | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
+          {:ok | :error, GraphQLResponse.t()} | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
   def query(request_params, query_params, variables \\ %{}) do
     query =
       query_params
@@ -15,8 +39,25 @@ defmodule Chalk do
     Request.graphql_query(request_params, query, variables)
   end
 
-  @spec build_query(query :: Keyword.t()) :: String.t()
-  def build_query(query), do: query |> to_graphql() |> add_curly_braces() |> query_key()
+  @doc """
+    It builds a query in format expected in Graphql
+
+    ## Arguments
+      * `query_params`, keyword with params to build the query
+
+    ## Examples
+
+      iex> query_params = [users: [:name, :age, friends: [:id, :name]]]
+      ...> Chalk.build_query(query_params)
+      "query{users{name age friends{id name}}}"
+
+      iex> query_params = ["User(id: $id)": [:name, :age, friends: [:id, :name]]]
+      ...> Chalk.build_query(query_params)
+      "query{User(id: $id){name age friends{id name}}}"
+  """
+  @spec build_query(query_params :: Keyword.t()) :: String.t()
+  def build_query(query_params),
+    do: query_params |> to_graphql() |> add_curly_braces() |> query_key()
 
   defp to_graphql(query) when is_list(query) do
     query
