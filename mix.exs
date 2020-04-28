@@ -12,19 +12,12 @@ defmodule Chalk.MixProject do
       deps: deps(),
       name: "Chalk",
       homepage_url: "https://github.com/thalesflores/chalk",
-      docs: [
-        source_url: "https://github.com/thalesflores/chalk",
-        extras: ["README.md"]
-      ],
-      deps: deps(),
-      test_coverage: [tool: ExCoveralls],
+      source_url: "https://github.com/thalesflores/chalk",
+      docs: docs(),
       elixirc_paths: elixirc_paths(Mix.env()),
-      name: "CPF",
-      dialyzer: [
-        plt_file: {:no_warn, "plts/dialyzer.plt"},
-        plt_add_apps: [:mix, :ex_unit]
-      ],
-      preferred_cli_env: [dialyzer: :test]
+      dialyzer: dialyzer_config(),
+      preferred_cli_env: [dialyzer: :test],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -50,13 +43,27 @@ defmodule Chalk.MixProject do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
-  def description do
+  defp docs do
+    [
+      source_url: "https://github.com/thalesflores/chalk",
+      extras: ["README.md"]
+    ]
+  end
+
+  defp dialyzer_config do
+    [
+      plt_file: {:no_warn, "plts/dialyzer.plt"},
+      plt_add_apps: [:mix, :ex_unit]
+    ]
+  end
+
+  defp description do
     "A light GraphQL client to Elixir projects."
   end
 
-  def package do
+  defp package do
     [
-      name: "Chalk",
+      name: "chalk",
       maintainers: ["Thales Flores"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/thalesflores/chalk"}
