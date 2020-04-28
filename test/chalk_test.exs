@@ -1,5 +1,5 @@
 defmodule ChalkTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   describe "build_query/2" do
     test "when passed a simple query and returns in graphql format" do
