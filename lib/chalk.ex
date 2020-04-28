@@ -3,15 +3,24 @@ defmodule Chalk do
   Documentation for `Chalk`.
   """
 
-  @spec query(params :: keyword()) :: String.t()
-  def query(params) do
-    params
-    |> to_graphql()
-    |> add_curly_braces()
+  alias __MODULE__.{GraphQLResponse, Request}
+
+  @spec query(request_params :: keyword(), query_params :: keyword(), variables :: map()) ::
+          GraphQLResponse.t() | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
+  def query(request_params, query_params, variables \\ %{}) do
+    query =
+      query_params
+      |> build_query()
+
+    Request.graphql_query(request_params, query, variables)
   end
 
+  @spec build_query(query :: Keyword.t()) :: String.t()
+  def build_query(query), do: query |> to_graphql() |> add_curly_braces() |> query_key()
+
   defp to_graphql(query) when is_list(query) do
-    Enum.reduce(query, "", fn {action, fields}, acc ->
+    query
+    |> Enum.reduce("", fn {action, fields}, acc ->
       acc <> ~s(#{to_camel_case(action)}#{to_graphql_fields(fields)})
     end)
   end
@@ -40,4 +49,6 @@ defmodule Chalk do
     |> String.replace_prefix("", "{")
     |> String.replace_suffix("", "}")
   end
+
+  defp query_key(query), do: "query" <> query
 end
