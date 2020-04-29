@@ -136,9 +136,3 @@ workflows:
           steps:
             - test:
                 elixir_version: "1.7"
-      - build:
-          name: "Elixir 1.6"
-          elixir_version: "1.6"
-          steps:
-            - test:
-                elixir_version: "1.6"
