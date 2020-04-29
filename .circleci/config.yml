@@ -112,7 +112,7 @@ workflows:
             - restore_app
             - run: mix format --check-formatted
             - run: mix credo --strict
-            - run: mix coveralls.circle
+            - run: mix coveralls.circle -t $COVERALLS_TOKEN
             - save_app
             - restore_plt
             - run: mix dialyzer --plt
