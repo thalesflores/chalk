@@ -45,16 +45,9 @@ defmodule Chalk do
 
   ## Arguments
 
-  <<<<<<< HEAD
     * query_params, keyword with params to build the query
 
   ## Examples
-  =======
-    ##Arguments
-      *query_params, keyword with params to build the query
-
-    ##Examples
-  >>>>>>> a36b967124760a37af563e29472141491ba740ba
 
     iex> query_params = [users: [:name, :age, friends: [:id, :name]]]
     iex> Chalk.build_query(query_params)
