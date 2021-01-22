@@ -4,10 +4,10 @@ defmodule Chalk.Request do
   """
   use HTTPoison.Base
 
-  alias Chalk.GraphQLRespose
+  alias Chalk.GraphQLResponse
 
   @doc """
-  It executes the graphql request and returns a %GraphQLRespose{} struct with the response
+  It executes the graphql request and returns a %GraphQLResponse{} struct with the response
 
   ## Arguments
 
@@ -21,10 +21,10 @@ defmodule Chalk.Request do
   ## Examples
 
     iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
-    %GraphQLRespose{}
+    %GraphQLResponse{}
 
     iex> Request.graphql_query([url: "http://test.com/", headers: [{"authorization", "234"}]], "query{users{name}"}, %{})
-    %GraphQLRespose{}
+    %GraphQLResponse{}
   """
   @spec graphql_query(request_params :: Keyword.t(), String.t(), map()) ::
           GraphQLResponse.t() | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
@@ -51,7 +51,7 @@ defmodule Chalk.Request do
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when status == 200 ->
         body
         |> process_body()
-        |> GraphQLRespose.build()
+        |> GraphQLResponse.build()
 
       {:ok, %HTTPoison.Response{} = error} ->
         {:error, {:chalk, :BAD_RESPONSE, error: inspect(error)}}

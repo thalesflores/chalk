@@ -1,4 +1,4 @@
-defmodule Chalk.GraphQLRespose do
+defmodule Chalk.GraphQLResponse do
   @moduledoc """
   Response struct to graphql responses
   """
@@ -14,10 +14,10 @@ defmodule Chalk.GraphQLRespose do
 
   ##Examples:
 
-    iex> Response.build(%{data: %{"name" => "test_name"}})
+    iex> GraphQLResponse.build(%{data: %{"name" => "test_name"}})
     %Response%{data: %{"name" => "test_name"}}
 
-    iex> Response.build(%{errors: %{"name" => "test_name"}})
+    iex> GraphQLResponse.build(%{errors: %{"name" => "test_name"}})
     %Response%{errors: []}
   """
   @spec build(raw_response :: map()) :: {:ok | :error, t()}

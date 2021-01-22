@@ -27,7 +27,7 @@ defmodule ChalkTest do
 
       params = [countries: [:code, :name, :capital, languages: [:code, :name]]]
 
-      assert {:ok, %Chalk.GraphQLRespose{data: data, errors: nil}} =
+      assert {:ok, %Chalk.GraphQLResponse{data: data, errors: nil}} =
                Chalk.query([url: endpoint(bypass)], params)
 
       assert is_map(data)
@@ -40,7 +40,7 @@ defmodule ChalkTest do
 
       params = [countries: [:code, :name, :error, languages: [:code, :name]]]
 
-      assert {:error, %Chalk.GraphQLRespose{data: nil, errors: errors}} =
+      assert {:error, %Chalk.GraphQLResponse{data: nil, errors: errors}} =
                Chalk.query([url: endpoint(bypass)], params)
 
       assert is_list(errors)
