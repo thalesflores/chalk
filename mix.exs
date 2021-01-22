@@ -29,14 +29,13 @@ defmodule Chalk.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.6"},
-      {:poison, "~> 3.1"},
-      {:ex_doc, "~> 0.21", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: [:dev, :test], runtime: false},
-      {:bypass, "~> 1.0", only: :test},
-      {:plug_cowboy, "~> 2.0", only: :test}
+      {:httpoison, "~> 1.8.0"},
+      {:poison, "~> 4.0.1"},
+      {:ex_doc, "~> 0.23.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5.4", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.13.4", only: [:dev, :test], runtime: false},
+      {:bypass, "~> 2.1.0", only: :test}
     ]
   end
 
