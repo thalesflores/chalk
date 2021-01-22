@@ -19,23 +19,21 @@ defmodule Chalk do
 
   ## Examples
 
-    iex> request_params = [url: "https://test.com/]
-    iex> query_params = [users: [:name, :age, friends: [:id, :name]]]
-    iex> Chalk.query(request_params, query_params)
-    %GraphQLResponse{}
+      iex> request_params = [url: "https://test.com/]
+      iex> query_params = [users: [:name, :age, friends: [:id, :name]]]
+      iex> Chalk.query(request_params, query_params)
+      %GraphQLResponse{}
 
-    iex> request_params = [url: "https://test.com/, headers: [{"Authorization", "Bearer 23333"}]]
-    iex> query_params = ["User(id: $id)": [:name, :age, friends: [:id, :name]]]
-    iex> variables = %{id: 123}
-    iex> Chalk.query(request_params, query_params, variables)
-    %GraphQLResponse{}
+      iex> request_params = [url: "https://test.com/, headers: [{"Authorization", "Bearer 23333"}]]
+      iex> query_params = ["User(id: $id)": [:name, :age, friends: [:id, :name]]]
+      iex> variables = %{id: 123}
+      iex> Chalk.query(request_params, query_params, variables)
+      %GraphQLResponse{}
   """
   @spec query(request_params :: keyword(), query_params :: keyword(), variables :: map()) ::
           {:ok | :error, GraphQLResponse.t()} | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
   def query(request_params, query_params, variables \\ %{}) do
-    query =
-      query_params
-      |> build_query()
+    query = build_query(query_params)
 
     Request.graphql_query(request_params, query, variables)
   end
@@ -62,8 +60,7 @@ defmodule Chalk do
     do: query_params |> to_graphql() |> add_curly_braces() |> query_key()
 
   defp to_graphql(query) when is_list(query) do
-    query
-    |> Enum.reduce("", fn {action, fields}, acc ->
+    Enum.reduce(query, "", fn {action, fields}, acc ->
       acc <> ~s(#{to_camel_case(action)}#{to_graphql_fields(fields)})
     end)
   end

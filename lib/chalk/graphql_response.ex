@@ -14,11 +14,11 @@ defmodule Chalk.GraphQLResponse do
 
   ##Examples:
 
-    iex> GraphQLResponse.build(%{data: %{"name" => "test_name"}})
-    %Response%{data: %{"name" => "test_name"}}
+      iex> GraphQLResponse.build(%{data: %{"name" => "test_name"}})
+      %Response%{data: %{"name" => "test_name"}}
 
-    iex> GraphQLResponse.build(%{errors: %{"name" => "test_name"}})
-    %Response%{errors: []}
+      iex> GraphQLResponse.build(%{errors: %{"name" => "test_name"}})
+      %Response%{errors: []}
   """
   @spec build(raw_response :: map()) :: {:ok | :error, t()}
   def build(raw_response = %{data: _}), do: {:ok, struct!(__MODULE__, raw_response)}

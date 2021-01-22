@@ -20,11 +20,11 @@ defmodule Chalk.Request do
 
   ## Examples
 
-    iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
-    %GraphQLResponse{}
+      iex> Request.graphql_query([url: "http://test.com/"], "query{users{name}"}, %{})
+      %GraphQLResponse{}
 
-    iex> Request.graphql_query([url: "http://test.com/", headers: [{"authorization", "234"}]], "query{users{name}"}, %{})
-    %GraphQLResponse{}
+      iex> Request.graphql_query([url: "http://test.com/", headers: [{"authorization", "234"}]], "query{users{name}"}, %{})
+      %GraphQLResponse{}
   """
   @spec graphql_query(request_params :: Keyword.t(), String.t(), map()) ::
           GraphQLResponse.t() | {:error, {:chalk, :BAD_RESPOSE | :CLIENT_ERROR}}
